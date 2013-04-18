@@ -6,7 +6,7 @@ EasyNetQ with added strategies...
 
 [EasyNetQ](https://github.com/mikehadlow/EasyNetQ) is an opinionated RabbitMQ client for .net. Sometimes it's nice to be able to extend those opinions with some of your own; for example, maybe you want to retry once rather than throw immediately if a connection is closed when you try and publish (EasyNetQ attempts to re-open connections it knows have failed, so this isn't quite as stupid as it sounds).
 
-Woundwort strategies are wrappers around the base EasyNetQ interface that designed to be composable (probably via IoC container) to give the messaging strategy you need for your app. And if it's not provided here, the worst case is that you've just found the `WrappedBus` and `WrappedPublishChannel` classes to help you easily write your own composable expansions to EasyNetQ. Hope you enjoy!
+Woundwort strategies are wrappers around the base EasyNetQ interface that are designed to be composable (probably via IoC container) to give the messaging strategy you need for your app. And if it's not provided here, the worst case is that you've just found the `WrappedBus` and `WrappedPublishChannel` classes to help you easily write your own composable expansions to EasyNetQ. Hope you enjoy!
 
 ## A word on design
 
