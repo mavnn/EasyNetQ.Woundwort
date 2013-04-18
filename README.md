@@ -1,6 +1,6 @@
 # EasyNetQ.Woundwort
 
-![General Woundwort](http://watershipdown.wikia.com/wiki/File:GeneralWoundwort.jpg)
+![General Woundwort](http://images.wikia.com/watershipdown/images/6/6a/GeneralWoundwort.jpg)
 
 EasyNetQ with added strategies...
 
