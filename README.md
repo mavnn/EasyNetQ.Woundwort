@@ -17,20 +17,29 @@ Woundwort deliberately only changes the behaviour of the 'simple' EasyNetQ metho
 
 Not even alpha. This is more of a request for comment than an actual implementation - let me know what you think in the issues or via email at michael+woundwort@mavnn.co.uk. 
 
-The only strategy currently implemented is the Retry strategy. It's not implemented very well - it's just a proof of concept.
+The only strategy currently implemented is the Retry strategy.
+
+You can create a retry bus with the following F# or C# code:
 
 ```fsharp
-use bus = new RetryBus(RabbitHutch.CreateBus()) :> IBus
+use bus = RabbitHutch.CreateBus() |> RetryBus.CreateBus :> IBus
 ```
 
 or
 
 ```csharp
-IBus bus = new RetryBus(RabbitHutch.CreateBus());
-
+IBus bus = RetryBus.CreateBus(RabbitHutch.CreateBus());
 ```
 
-will give you a bus that will retry a failed publish or request response after 200 mseconds the first time it throws an EasyNetQException. If it throws anyway else, or fails a second time, you're on your own.
+A retry bus will catch the first failed attempt to publish that throws an `EasyNetQException`. If the bus is connected, it will retry immediately - otherwise it will wait up to 5 seconds for the bus to re-connect and attempt to re-send.
+
+If the re-connection times out it will re-throw the original exception, and if the a second publish attempt fails it will throw.
+
+## DoubleTap and Chaos
+
+To help with your testing needs, two WrappedBuses have been provided with... unusual characteristics. The DoubleTapBus will alternately throw `EasyNetQException`s and publish normally, while the `ChaosBus` pseudo-randomly fails 50% of the time. To make testing with the Chaos bus slightly saner, it's always seeded with the same value.
+
+Tests have been written using the wonderful [FsUnit](http://code.google.com/p/fsunit/), and I have some plans to incorporate some [FsCheck](http://fscheck.codeplex.com/) tests when I get a chance.
 
 ## Licence
 

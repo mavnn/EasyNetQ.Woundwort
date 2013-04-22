@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EasyNetQ.Woundwort", "EasyNetQ.Woundwort\EasyNetQ.Woundwort.fsproj", "{FFFEF317-C76F-4011-A7A5-E05A47A78608}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EasyNetQ.Woundwort.Tests", "EasyNetQ.Woundwort.Tests\EasyNetQ.Woundwort.Tests.fsproj", "{7AC02D17-6816-42A6-BECA-878CFF25CF92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{FFFEF317-C76F-4011-A7A5-E05A47A78608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFFEF317-C76F-4011-A7A5-E05A47A78608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFFEF317-C76F-4011-A7A5-E05A47A78608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC02D17-6816-42A6-BECA-878CFF25CF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC02D17-6816-42A6-BECA-878CFF25CF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC02D17-6816-42A6-BECA-878CFF25CF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC02D17-6816-42A6-BECA-878CFF25CF92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
