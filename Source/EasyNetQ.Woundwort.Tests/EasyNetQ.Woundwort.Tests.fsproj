@@ -36,6 +36,10 @@
       <HintPath>..\packages\EasyNetQ.0.10.0.80\lib\net40\EasyNetQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Foq">
+      <HintPath>..\packages\Foq.0.9\lib\net45\Foq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FsCheck">
       <HintPath>..\packages\FsCheck.0.8.3.0\lib\net40-Client\FsCheck.dll</HintPath>
       <Private>True</Private>
@@ -72,6 +76,7 @@
     <None Include="Script.fsx" />
     <None Include="packages.config" />
     <None Include="app.config" />
+    <None Include="Foq.Usage.fsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EasyNetQ.Woundwort\EasyNetQ.Woundwort.fsproj">

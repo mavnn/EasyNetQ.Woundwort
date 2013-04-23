@@ -2,6 +2,15 @@
 module EasyNetQ.Woundwort.Tests.TestHelpers
 open System
 open EasyNetQ
+open Foq
+
+let mockChannel = 
+    Mock<IPublishChannel>()
+        .Create()
+let mockBus =
+    Mock<IBus>()
+        .Setup(fun x -> <@ x.OpenPublishChannel() @>).Returns(mockChannel)
+        .Create()
 
 let testTracker (collector : ResizeArray<Choice<Exception, string * obj[]>>) =
     { new IEasyNetQLogger with

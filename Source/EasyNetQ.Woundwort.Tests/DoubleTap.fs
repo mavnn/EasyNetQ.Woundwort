@@ -31,7 +31,7 @@ type DoubleTapBus =
         new DoubleTapBus(bus)
 
 let doubleTap collector =
-    RabbitHutch.CreateBus("host=localhost", fun (x : IServiceRegister) -> ignore <| x.Register<IEasyNetQLogger>(fun _ -> testTracker(collector)))
+    mockBus
     |> DoubleTapBus.CreateBus
     :> IBus
 
@@ -42,7 +42,6 @@ let ``Double Tap should throw on first publish`` () =
     (fun () -> channel.Publish("Single attempt.")) |> should throw typeof<EasyNetQException>
 
 [<Test>]
-// [<Explicit("Requires local rabbit bus")>]
 let ``Double Tap should succeed on second attempt`` () =
     let sut = doubleTap (new ResizeArray<Choice<Exception, string * obj[]>>())
     use channel = sut.OpenPublishChannel ()

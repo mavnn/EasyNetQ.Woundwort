@@ -28,4 +28,3 @@ type ChaosBus =
 let chaos tracker =
     RabbitHutch.CreateBus("localhost", fun (x : IServiceRegister) -> ignore <| x.Register<IEasyNetQLogger>(fun _ -> tracker))
     |> ChaosBus.CreateBus
-    |> RetryBus.CreateBus

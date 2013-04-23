@@ -2,6 +2,6 @@
 
 type RetryPublishChannel =
     inherit WrappedPublishChannel
-    new (channel) = { inherit WrappedPublishChannel(Retry.Retry, channel) }
+    new (channel) = { inherit WrappedPublishChannel(Retry.RetryPublish, channel) }
 
 

@@ -8,3 +8,5 @@ type RetryBus =
             (fun chan -> new RetryPublishChannel(chan) :> IPublishChannel),
             (fun f -> f()), 
             bus) }
+    static member CreateBus (bus : IBus) =
+        new RetryBus(bus)
