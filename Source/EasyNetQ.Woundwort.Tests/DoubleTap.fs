@@ -30,22 +30,22 @@ type DoubleTapBus =
     static member CreateBus(bus : IBus) =
         new DoubleTapBus(bus)
 
-let doubleTap collector =
+let doubleTap () =
     mockBus
     |> DoubleTapBus.CreateBus
     :> IBus
 
 [<Test>]
 let ``Double Tap should throw on first publish`` () =
-    let sut = doubleTap (new ResizeArray<Choice<Exception, string * obj[]>>())
+    let sut = doubleTap ()
     use channel = sut.OpenPublishChannel ()
     (fun () -> channel.Publish("Single attempt.")) |> should throw typeof<EasyNetQException>
 
 [<Test>]
 let ``Double Tap should succeed on second attempt`` () =
-    let sut = doubleTap (new ResizeArray<Choice<Exception, string * obj[]>>())
+    let sut = doubleTap ()
     use channel = sut.OpenPublishChannel ()
     try
         channel.Publish("One!")
     with
-    | :? EasyNetQException -> (fun () -> channel.Publish("Two!")) |> should not' (throw typeof<EasyNetQException>)
+    | :? EasyNetQException -> channel.Publish("Two!") |> should be (sameAs ())

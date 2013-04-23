@@ -8,6 +8,8 @@ open FsUnit
 
 [<Test>]
 let ``Double Tap should succeed with RetryBus`` () =
-    let sut = doubleTap (new ResizeArray<Choice<Exception, string * obj[]>>()) |> RetryBus.CreateBus :> IBus
+    let sut = doubleTap () |> RetryBus.CreateBus :> IBus
     use channel = sut.OpenPublishChannel ()
-    (fun () -> channel.Publish("One!")) |> should not' (throw typeof<EasyNetQException>)
+    channel.Publish("One!")
+    |> should be (sameAs ())
+    

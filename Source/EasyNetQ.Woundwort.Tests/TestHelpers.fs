@@ -4,13 +4,24 @@ open System
 open EasyNetQ
 open Foq
 
-let mockChannel = 
+let mutable private mockBusO : IBus option = None
+let mutable private mockChannelO : IPublishChannel option = None
+
+mockChannelO <-
     Mock<IPublishChannel>()
+        .Setup(fun x -> <@ x.Bus @>).Returns(fun () -> mockBusO.Value)
         .Create()
-let mockBus =
+    |> Some
+
+mockBusO <-
     Mock<IBus>()
-        .Setup(fun x -> <@ x.OpenPublishChannel() @>).Returns(mockChannel)
+        .Setup(fun x -> <@ x.OpenPublishChannel() @>).Returns(fun () -> mockChannelO.Value)
+        .Setup(fun x -> <@ x.IsConnected @>).Returns(true)
         .Create()
+    |> Some
+
+let mockBus = mockBusO.Value
+let mockChannel = mockChannelO.Value
 
 let testTracker (collector : ResizeArray<Choice<Exception, string * obj[]>>) =
     { new IEasyNetQLogger with
